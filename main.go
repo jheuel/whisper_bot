@@ -45,8 +45,9 @@ func main() {
 			continue
 		}
 		if userID != 0 && update.Message.From.ID != userID {
-			msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Sorry, this is a private bot.")
+			msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Sorry, this is a private bot. Visit [github.com/jheuel/whisper_bot](https://github.com/jheuel/whisper_bot) to find out how to host your own instance.")
 			msg.ReplyToMessageID = update.Message.MessageID
+			msg.ParseMode = "markdown"
 			_, err = bot.Send(msg)
 			if err != nil {
 				log.Println("error handling message:", err)
