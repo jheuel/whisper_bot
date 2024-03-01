@@ -53,7 +53,7 @@ func main() {
 				continue
 			}
 		}
-		if update.Message.Document != nil || update.Message.Voice != nil {
+		if update.Message.Document != nil || update.Message.Voice != nil || update.Message.Audio != nil {
 			err := handleFile(update, bot)
 			if err != nil {
 				log.Println("error handling message:", err)
@@ -70,6 +70,9 @@ func handleFile(update tgbotapi.Update, bot *tgbotapi.BotAPI) error {
 	}
 	if update.Message.Voice != nil {
 		fileID = update.Message.Voice.FileID
+	}
+	if update.Message.Audio != nil {
+		fileID = update.Message.Audio.FileID
 	}
 	fileURL, err := bot.GetFileDirectURL(fileID)
 	if err != nil {
